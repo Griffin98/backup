@@ -188,15 +188,15 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
 
 # Radio
-#PRODUCT_PACKAGES += \
-#    libsecril-client \
-#    libsecril-client-sap \
-#	rild \
-#	libreference-ril \
-#	libril \
-#    modemloader \
-#    libxml2 \
-#    libprotobuf-cpp-full
+PRODUCT_PACKAGES += \
+    libsecril-client \
+    libsecril-client-sap \
+	rild \
+	libreference-ril \
+	libril \
+        modemloader \
+       libxml2 \
+       libprotobuf-cpp-full
 
 #PRODUCT_PROPERTY_OVERRIDES += \
 #    ro.carrier=unknown
