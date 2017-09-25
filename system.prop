@@ -2,10 +2,15 @@
 # system.prop for k3gxx
 #
 
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+	camera.disable_treble=true
+
 # Grapics
 ro.bq.gpu_to_cpu_unsupported=1
 
 # Open GL
+debug.hwui.use_buffer_age=false \
 ro.opengles.version=196609
 
 # Lcd density
@@ -38,4 +43,8 @@ audio_hal.force_voice_config=wide
 persist.bluetooth.disableabsvol=true
 
 # Sdcardfs
-ro.sys.sdcardfs=true
+ro.sys.sdcardfs=false
+
+#consumer IR
+PRODUCT_PROPERTY_OVERRIDES += \
+	config.disable_consumerir=true

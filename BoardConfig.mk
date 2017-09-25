@@ -72,6 +72,9 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_CUSTOM_BOOTIMG := true
 BOARD_CUSTOM_BOOTIMG_MK := hardware/samsung/mkbootimg.mk
 
+# temp hack
+BOARD_KERNEL_CMDLINE := androidboot.selinux=permissive
+
 # FIMG2D
 BOARD_USES_SKIA_FIMGAPI := true
 
@@ -123,7 +126,7 @@ BOARD_USES_HWC_SERVICES := true
 TARGET_NO_SENSOR_PERMISSION_CHECK := true
 
 # frameworks/native/libs/binder/Parcel.cpp
-TARGET_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
+# TARGET_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Samsung OpenMAX Video
 BOARD_USE_STOREMETADATA := true

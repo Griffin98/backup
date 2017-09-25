@@ -30,7 +30,9 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.primary.universal5422 \
     libtinycompress \
-    tinymix
+    tinymix \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
@@ -72,24 +74,29 @@ PRODUCT_PACKAGES += \
     libion \
     libfimg \
     gralloc.exynos5 \
+    libgutils \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.mapper@2.0-impl \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.memtrack@1.0-impl
 
 # Consumerir
 PRODUCT_PACKAGES += \
     consumerir.universal5422
 
+# Keymaster
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
+
 # Lights
 PRODUCT_PACKAGES += \
-    lights.universal5422
-
-# libstlport
-# M removes libstlport, but some of our binary-only prebuilts need it, so we'll
-# add it back
-PRODUCT_PACKAGES += \
-    libstlport
+    lights.universal5422 \
+    android.hardware.light@2.0-impl
 
 # Power
 PRODUCT_PACKAGES += \
-    power.universal5422
+    power.universal5422 \
+    android.hardware.power@1.0-impl
 
 # NFC
 PRODUCT_PACKAGES += \
@@ -116,7 +123,6 @@ PRODUCT_COPY_FILES += \
 	frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
 	$(LOCAL_PATH)/configs/media/media_codecs.xml:system/etc/media_codecs.xml \
 	$(LOCAL_PATH)/configs/media/media_profiles.xml:system/etc/media_profiles.xml \
-	$(LOCAL_PATH)/configs/media/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
 	$(LOCAL_PATH)/configs/media/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
 
 # Permissions
@@ -148,8 +154,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
     frameworks/native/data/etc/android.hardware.camera.front.xml:system/etc/permissions/android.hardware.camera.front.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
-    frameworks/native/data/etc/android.hardware.fingerprint.xml:system/etc/permissions/android.hardware.fingerprint.xml
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml
+
+# Bluetooth HAL
+PRODUCT_PACKAGES += \
+    android.hardware.bluetooth@1.0-impl \
+    libbt-vendor
 
 # Power
 PRODUCT_PACKAGES += \
@@ -166,9 +176,10 @@ PRODUCT_PACKAGES += \
     ueventd.universal5422.rc \
     init.power.rc 
 
-# Samsung Doze
-PRODUCT_PACKAGES += \
-    SamsungDoze
+
+# HIDL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/manifest.xml:system/vendor/manifest.xml
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
@@ -177,15 +188,22 @@ PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/configs/idc/Synaptics_HID_TouchPad.idc:/system/usr/idc/Synaptics_HID_TouchPad.idc
 
 # Radio
-PRODUCT_PACKAGES += \
-    libsecril-client \
-    libsecril-client-sap \
-    modemloader \
-    libxml2 \
-    libprotobuf-cpp-full
+#PRODUCT_PACKAGES += \
+#    libsecril-client \
+#    libsecril-client-sap \
+#	rild \
+#	libreference-ril \
+#	libril \
+#    modemloader \
+#    libxml2 \
+#    libprotobuf-cpp-full
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.carrier=unknown
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    ro.carrier=unknown
+
+# Sensors wrapper
+PRODUCT_PACKAGES += \
+    sensors.universal5422
 
 # MTP
 PRODUCT_PACKAGES += \
@@ -195,26 +213,40 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     keystore.exynos5
 
-# WIFI
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    $(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf 
-        
+# Sensors
 PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl
+
+# WIFI HAL
+PRODUCT_PACKAGES += \
+    android.hardware.wifi@1.0-service \
     libnetcmdiface \
     macloader \
     wifiloader \
     hostapd \
     hostapd_default.conf \
     libwpa_client \
+    wificond \
     wpa_supplicant
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+$(LOCAL_PATH)/configs/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
 # Fingerprint
+#PRODUCT_PACKAGES += \
+#    fingerprintd \
+#    fingerprint.universal5422 \
+#    ValidityService
+
+# Vibrator HAL
 PRODUCT_PACKAGES += \
-    fingerprintd \
-    fingerprint.universal5422 \
-    ValidityService
+    android.hardware.vibrator@1.0-impl 
+
+# USB HAL
+PRODUCT_PACKAGES += \
+	android.hardware.usb@1.0-service
 
 # Legacy stagefright media
 PRODUCT_PROPERTY_OVERRIDES += \
